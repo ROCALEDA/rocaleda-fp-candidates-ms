@@ -2,6 +2,7 @@ import os
 import asyncio
 from typing import Callable
 from google.cloud import pubsub_v1
+from google.pubsub_v1 import PullRequest
 from google.oauth2.service_account import Credentials
 
 creds = Credentials.from_service_account_info(
@@ -35,7 +36,8 @@ async def pull_messages(
     subscriber: pubsub_v1.SubscriberClient, subscription_path: str, handler: Callable
 ) -> None:
     while True:
-        response = subscriber.pull(subscription_path, max_messages=10)
+        pull_request = PullRequest(subscription=subscription_path, max_messages=10)
+        response = subscriber.pull(request=pull_request)
 
         for received_message in response.received_messages:
             try:

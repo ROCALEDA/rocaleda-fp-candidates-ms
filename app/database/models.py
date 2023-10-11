@@ -20,7 +20,9 @@ class Technology(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
 
-    candidates = relationship("Candidate", secondary="candidate_tech_skill")
+    candidates = relationship(
+        "Candidate", secondary="candidate_tech_skill", back_populates="tech_skills"
+    )
 
 
 class CandidateTechSkill(Base):
@@ -37,7 +39,9 @@ class SoftSkill(Base):
     name = Column(String)
     description = Column(String)
 
-    candidates = relationship("Candidate", secondary="candidate_soft_skill")
+    candidates = relationship(
+        "Candidate", secondary="candidate_soft_skill", back_populates="soft_skills"
+    )
 
 
 class CandidateSoftSkill(Base):

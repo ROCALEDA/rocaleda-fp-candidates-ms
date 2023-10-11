@@ -26,7 +26,7 @@ async def on_startup() -> None:
         pull_messages(
             create_candidate_sub,
             CANDIDATE_CREATION_SUB_PATH,
-            create_candidate_handler(instances.candidate_service),
+            await create_candidate_handler(instances.candidate_service),
         )
     )
 
