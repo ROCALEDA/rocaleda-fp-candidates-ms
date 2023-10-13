@@ -1,8 +1,4 @@
 import asyncio
-from dotenv import load_dotenv
-
-
-load_dotenv()
 
 from app.commons.gcp import (
     pull_messages,

@@ -1,9 +1,13 @@
+from typing import TYPE_CHECKING
+
 from app.database.schemas import CreateCandidate
-from app.candidate.repositories.candidate_repository import CandidateRepository
+
+if TYPE_CHECKING:
+    from app.candidate.repositories.candidate_repository import CandidateRepository
 
 
 class CandidateService:
-    def __init__(self, candidate_repository: CandidateRepository):
+    def __init__(self, candidate_repository: "CandidateRepository"):
         self.candidate_repository = candidate_repository
 
     async def create_candidate(self, new_candidate: CreateCandidate) -> None:
