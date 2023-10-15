@@ -41,7 +41,7 @@ async def pull_messages(
 ) -> None:
     while True:
         pull_request = PullRequest(subscription=subscription_path, max_messages=10)
-        response = subscriber.pull(request=pull_request)
+        response = subscriber.pull(request=pull_request, timeout=15.0)
 
         for received_message in response.received_messages:
             try:
