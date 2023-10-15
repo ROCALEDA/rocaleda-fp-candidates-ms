@@ -40,8 +40,11 @@ async def pull_messages(
     subscriber: pubsub_v1.SubscriberClient, subscription_path: str, handler: Callable
 ) -> None:
     while True:
-        pull_request = PullRequest(subscription=subscription_path, max_messages=10)
-        response = subscriber.pull(request=pull_request, timeout=15.0)
+        try:
+            pull_request = PullRequest(subscription=subscription_path, max_messages=10)
+            response = subscriber.pull(request=pull_request, timeout=2)
+        except Exception as e:
+            pass
 
         for received_message in response.received_messages:
             try:
@@ -51,3 +54,5 @@ async def pull_messages(
                 )
             except Exception as e:
                 print(f"Error processing message: {e}")
+
+        await asyncio.sleep(15)
