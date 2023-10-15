@@ -44,7 +44,8 @@ async def pull_messages(
             pull_request = PullRequest(subscription=subscription_path, max_messages=10)
             response = subscriber.pull(request=pull_request, timeout=2)
         except Exception as e:
-            pass
+            await asyncio.sleep(15)
+            continue
 
         for received_message in response.received_messages:
             try:
