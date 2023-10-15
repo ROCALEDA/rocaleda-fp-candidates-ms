@@ -5,6 +5,7 @@ from google.cloud import pubsub_v1
 from google.pubsub_v1 import PullRequest
 from google.oauth2.service_account import Credentials
 
+print("LOGGING KEY")
 print(os.environ["GOOGLE_CLOUD_PRIVATE_KEY"])
 creds = Credentials.from_service_account_info(
     {
