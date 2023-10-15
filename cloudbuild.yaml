@@ -4,7 +4,8 @@ steps:
   args:
       - -c
       - |
-        sed -i "s|VAR_DB_URL|$_DB_URL|g" app.yaml
+        escaped_db_url=$(printf "%q" "$_DB_URL")
+        sed -i "s|VAR_DB_URL|'$escaped_db_url'|g" app.yaml
         sed -i "s|VAR_PROJECT_ID|$PROJECT_ID|g" app.yaml
         sed -i "s|VAR_REGION|$LOCATION|g" app.yaml
         sed -i "s|VAR_VPC_CONNECTOR|$_VPC_CONNECTOR_NAME|g" app.yaml
