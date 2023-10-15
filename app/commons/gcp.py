@@ -6,7 +6,7 @@ from google.pubsub_v1 import PullRequest
 from google.oauth2.service_account import Credentials
 
 
-if os.environ.get("ENV", "DEV") == "DEV":
+if os.environ.get("ENV", "PROD") == "DEV":
     creds = Credentials.from_service_account_info(
         {
             "type": os.environ["GOOGLE_CLOUD_TYPE"],
