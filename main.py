@@ -1,5 +1,9 @@
 import asyncio
 
+# from dotenv import load_dotenv
+
+# load_dotenv()
+
 from app.commons.gcp import (
     pull_messages,
     create_candidate_sub,
@@ -16,15 +20,15 @@ instances = Initializer(app)
 instances.setup()
 
 
-@app.on_event("startup")
-async def on_startup() -> None:
-    asyncio.create_task(
-        pull_messages(
-            create_candidate_sub,
-            CANDIDATE_CREATION_SUB_PATH,
-            await create_candidate_handler(instances.candidate_service),
-        )
-    )
+# @app.on_event("startup")
+# async def on_startup() -> None:
+#     asyncio.create_task(
+#         pull_messages(
+#             create_candidate_sub,
+#             CANDIDATE_CREATION_SUB_PATH,
+#             await create_candidate_handler(instances.candidate_service),
+#         )
+#     )
 
 
 if __name__ == "__main__":
