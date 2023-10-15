@@ -4,25 +4,19 @@ steps:
   args:
       - -c
       - |
-        # echo 'user defined substitution candidate must start with underscore'
-        # echo 'example is : substitution vpc is '$_VPC_CONNECTOR_NAME
-        # echo 'default substitutions don't need initial underscore; example: '
-        # echo 'example is : the region associated with your build is '$LOCATION
-        sed -i "s|VAR_SERVICENAME1_MS|$_SERVICE_NAME1_MS|g" app.yaml
+        sed -i "s|VAR_CANDIDATE_CREATION_SUBSCRIPTION_NAME|$_VAR_CANDIDATE_CREATION_SUBSCRIPTION_NAME|g" app.yaml
+        sed -i "s|VAR_DB_URL|$_DB_URL|g" app.yaml
+        sed -i "s|VAR_GOOGLE_CLOUD_TYPE|$_GOOGLE_CLOUD_TYPE|g" app.yaml
+        sed -i "s|VAR_GOOGLE_CLOUD_PRIVATE_KEY_ID|$_GOOGLE_CLOUD_PRIVATE_KEY_ID|g" app.yaml
+        sed -i "s|VAR_GOOGLE_CLOUD_PRIVATE_KEY|$_GOOGLE_CLOUD_PRIVATE_KEY|g" app.yaml
+        sed -i "s|VAR_GOOGLE_CLOUD_CLIENT_EMAIL|$_GOOGLE_CLOUD_CLIENT_EMAIL|g" app.yaml
+        sed -i "s|VAR_GOOGLE_CLOUD_CLIENT_ID|$_GOOGLE_CLOUD_CLIENT_ID|g" app.yaml
+        sed -i "s|VAR_GOOGLE_CLOUD_AUTH_URI|$_GOOGLE_CLOUD_AUTH_URI|g" app.yaml
+        sed -i "s|VAR_GOOGLE_CLOUD_TOKEN_URI|$_GOOGLE_CLOUD_TOKEN_URI|g" app.yaml
+        sed -i "s|VAR_GOOGLE_CLOUD_AUTH_PROVIDER_X509_CERT_URL|$_GOOGLE_CLOUD_AUTH_PROVIDER_X509_CERT_URL|g" app.yaml
+        sed -i "s|VAR_GOOGLE_CLOUD_CLIENT_X509_CERT_URL|$_GOOGLE_CLOUD_CLIENT_X509_CERT_URL|g" app.yaml
         sed -i "s|VAR_PROJECT_ID|$PROJECT_ID|g" app.yaml
         sed -i "s|VAR_REGION|$LOCATION|g" app.yaml
         sed -i "s|VAR_VPC_CONNECTOR|$_VPC_CONNECTOR_NAME|g" app.yaml
-        echo "CANDIDATE_CREATION_SUBSCRIPTION_NAME=$(gcloud secrets versions access latest --secret=CANDIDATE_CREATION_SUBSCRIPTION_NAME)" > .env
-        echo "GOOGLE_CLOUD_PROJECT=$(gcloud secrets versions access latest --secret=GOOGLE_CLOUD_PROJECT)" >> .env
-        echo "GOOGLE_CLOUD_TYPE=$(gcloud secrets versions access latest --secret=GOOGLE_CLOUD_TYPE)" >> .env
-        echo "GOOGLE_CLOUD_PRIVATE_KEY_ID=$(gcloud secrets versions access latest --secret=GOOGLE_CLOUD_PRIVATE_KEY_ID)" >> .env
-        echo "GOOGLE_CLOUD_PRIVATE_KEY=$(gcloud secrets versions access latest --secret=GOOGLE_CLOUD_PRIVATE_KEY)" >> .env
-        echo "GOOGLE_CLOUD_CLIENT_EMAIL=$(gcloud secrets versions access latest --secret=GOOGLE_CLOUD_CLIENT_EMAIL)" >> .env
-        echo "GOOGLE_CLOUD_CLIENT_ID=$(gcloud secrets versions access latest --secret=GOOGLE_CLOUD_CLIENT_ID)" >> .env
-        echo "GOOGLE_CLOUD_AUTH_URI=$(gcloud secrets versions access latest --secret=GOOGLE_CLOUD_AUTH_URI)" >> .env
-        echo "GOOGLE_CLOUD_TOKEN_URI=$(gcloud secrets versions access latest --secret=GOOGLE_CLOUD_TOKEN_URI)" >> .env
-        echo "GOOGLE_CLOUD_AUTH_PROVIDER_X509_CERT_URL=$(gcloud secrets versions access latest --secret=GOOGLE_CLOUD_AUTH_PROVIDER_X509_CERT_URL)" >> .env
-        echo "GOOGLE_CLOUD_CLIENT_X509_CERT_URL=$(gcloud secrets versions access latest --secret=GOOGLE_CLOUD_CLIENT_X509_CERT_URL)" >> .env
-        echo "DB_URL=$(gcloud secrets versions access latest --secret=CANDIDATES_DB_URL)" >> .env
         gcloud app deploy
 timeout: "1600s"
