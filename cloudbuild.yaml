@@ -19,5 +19,6 @@ steps:
         sed -i "s|VAR_PROJECT_ID|$PROJECT_ID|g" app.yaml
         sed -i "s|VAR_REGION|$LOCATION|g" app.yaml
         sed -i "s|VAR_VPC_CONNECTOR|$_VPC_CONNECTOR_NAME|g" app.yaml
+        cat app.yaml
         gcloud app deploy
 timeout: "1600s"
