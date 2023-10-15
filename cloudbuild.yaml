@@ -4,17 +4,8 @@ steps:
   args:
       - -c
       - |
-        sed -i "s|VAR_CANDIDATE_CREATION_SUBSCRIPTION_NAME|$_VAR_CANDIDATE_CREATION_SUBSCRIPTION_NAME|g" app.yaml
+        sed -i "s|VAR_CANDIDATE_CREATION_SUBSCRIPTION_NAME|$_CANDIDATE_CREATION_SUBSCRIPTION_NAME|g" app.yaml
         sed -i "s|VAR_DB_URL|$_DB_URL|g" app.yaml
-        sed -i "s|VAR_GOOGLE_CLOUD_TYPE|$_GOOGLE_CLOUD_TYPE|g" app.yaml
-        sed -i "s|VAR_GOOGLE_CLOUD_PRIVATE_KEY_ID|$_GOOGLE_CLOUD_PRIVATE_KEY_ID|g" app.yaml
-        sed -i "s|VAR_GOOGLE_CLOUD_PRIVATE_KEY|$_GOOGLE_CLOUD_PRIVATE_KEY|g" app.yaml
-        sed -i "s|VAR_GOOGLE_CLOUD_CLIENT_EMAIL|$_GOOGLE_CLOUD_CLIENT_EMAIL|g" app.yaml
-        sed -i "s|VAR_GOOGLE_CLOUD_CLIENT_ID|$_GOOGLE_CLOUD_CLIENT_ID|g" app.yaml
-        sed -i "s|VAR_GOOGLE_CLOUD_AUTH_URI|$_GOOGLE_CLOUD_AUTH_URI|g" app.yaml
-        sed -i "s|VAR_GOOGLE_CLOUD_TOKEN_URI|$_GOOGLE_CLOUD_TOKEN_URI|g" app.yaml
-        sed -i "s|VAR_GOOGLE_CLOUD_AUTH_PROVIDER_X509_CERT_URL|$_GOOGLE_CLOUD_AUTH_PROVIDER_X509_CERT_URL|g" app.yaml
-        sed -i "s|VAR_GOOGLE_CLOUD_CLIENT_X509_CERT_URL|$_GOOGLE_CLOUD_CLIENT_X509_CERT_URL|g" app.yaml
         sed -i "s|VAR_PROJECT_ID|$PROJECT_ID|g" app.yaml
         sed -i "s|VAR_REGION|$LOCATION|g" app.yaml
         sed -i "s|VAR_VPC_CONNECTOR|$_VPC_CONNECTOR_NAME|g" app.yaml
