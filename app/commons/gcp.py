@@ -51,5 +51,3 @@ async def pull_messages(
                 )
             except Exception as e:
                 print(f"Error processing message: {e}")
-
-        await asyncio.sleep(15)
