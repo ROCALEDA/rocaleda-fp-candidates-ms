@@ -4,8 +4,8 @@ steps:
   args:
       - -c
       - |
-        sed -i "s|VAR_GOOGLE_CLOUD_PRIVATE_KEY|$_GOOGLE_CLOUD_PRIVATE_KEY|g" app.yaml
-        sed -i "s|\\n|\n|g" app.yaml
+        echo "${_GOOGLE_CLOUD_PRIVATE_KEY}" > pem_key.pem
+        sed -i "s/VAR_GOOGLE_CLOUD_PRIVATE_KEY/$(cat pem_key.pem | tr -d '\n')/" app.yaml
         sed -i "s|VAR_CANDIDATE_CREATION_SUBSCRIPTION_NAME|$_VAR_CANDIDATE_CREATION_SUBSCRIPTION_NAME|g" app.yaml
         sed -i "s|VAR_DB_URL|$_DB_URL|g" app.yaml
         sed -i "s|VAR_GOOGLE_CLOUD_TYPE|$_GOOGLE_CLOUD_TYPE|g" app.yaml
