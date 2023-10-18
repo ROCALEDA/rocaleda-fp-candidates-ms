@@ -20,7 +20,7 @@ def initialize(candidate_service: "CandidateService"):
         message = data.message
         if not message:
             raise HTTPException(status_code=400, detail="Invalid message format")
-
+        print("Received message from pubsub: ", message)
         candidate = CreateCandidate(**message)
         await candidate_service.create_candidate(candidate)
 
