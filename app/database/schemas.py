@@ -10,3 +10,7 @@ class CandidateBase(BaseModel):
 class CreateCandidate(CandidateBase):
     tech_skills: List[str]
     soft_skills: List[str]
+
+
+class PubSubMessage(BaseModel):
+    message: dict
