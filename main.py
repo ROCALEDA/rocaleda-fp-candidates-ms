@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from initializer import Initializer
+from app.candidate.handlers.candidate_handlers import create_candidate_handler
 
 
 app = FastAPI()
