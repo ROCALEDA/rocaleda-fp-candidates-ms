@@ -15,7 +15,7 @@ router = APIRouter(
 
 
 def initialize(candidate_service: "CandidateService"):
-    @router.post("/candidate/push")
+    @router.post("/push")
     async def create_candidate_from_push(data: PubSubMessage = Body(...)):
         message = data.message
         if not message:
