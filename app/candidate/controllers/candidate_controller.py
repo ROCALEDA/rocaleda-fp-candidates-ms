@@ -32,17 +32,20 @@ def initialize(candidate_service: "CandidateService"):
         return {"success": True}
 
     @router.get("")
-    async def get_candidates(
-        tech_skills: str = Query(None), soft_skills: str = Query(None)
+    async def get_candidates_paginated(
+        tech_skills: str = Query(None),
+        soft_skills: str = Query(None),
+        page: int = Query(1),
+        limit: int = Query(10),
     ):
         tech_list = tech_skills.split(",") if tech_skills else []
         soft_list = soft_skills.split(",") if soft_skills else []
 
-        return await candidate_service.get_candidates(
-            tech_skills=tech_list, soft_skills=soft_list
+        return await candidate_service.get_candidates_paginated(
+            tech_skills=tech_list, soft_skills=soft_list, page=page, limit=limit
         )
 
     return {
         "create_candidate_from_push": create_candidate_from_push,
-        "get_candidates": get_candidates,
+        "get_candidates": get_candidates_paginated,
     }
