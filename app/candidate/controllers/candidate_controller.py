@@ -47,5 +47,5 @@ def initialize(candidate_service: "CandidateService"):
 
     return {
         "create_candidate_from_push": create_candidate_from_push,
-        "get_candidates": get_candidates_paginated,
+        "get_candidates_paginated": get_candidates_paginated,
     }
