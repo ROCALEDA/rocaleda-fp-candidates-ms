@@ -57,6 +57,9 @@ class CandidateRepository:
             elif soft_skill_subquery:
                 query = query.filter(models.Candidate.user_id.in_(soft_skill_subquery))
 
+            total_count = query.count()
+            total_pages = (total_count + per_page - 1) // per_page
+
             offset = (page - 1) * per_page
             query = query.offset(offset).limit(per_page)
 
@@ -65,4 +68,4 @@ class CandidateRepository:
                 joinedload(models.Candidate.tech_skills),
             ).all()
 
-            return candidates_with_skills
+            return {"data": candidates_with_skills, "total_pages": total_pages}
