@@ -1,6 +1,6 @@
 import base64
 import json
-from fastapi import APIRouter, Body, HTTPException
+from fastapi import APIRouter, Body, HTTPException, Query
 from app.database.schemas import PubSubMessage, CreateCandidate
 from typing import TYPE_CHECKING
 
@@ -31,6 +31,18 @@ def initialize(candidate_service: "CandidateService"):
 
         return {"success": True}
 
+    @router.get("")
+    async def get_candidates(
+        tech_skills: str = Query(None), soft_skills: str = Query(None)
+    ):
+        tech_list = tech_skills.split(",") if tech_skills else []
+        soft_list = soft_skills.split(",") if soft_skills else []
+
+        return await candidate_service.get_candidates(
+            tech_skills=tech_list, soft_skills=soft_list
+        )
+
     return {
         "create_candidate_from_push": create_candidate_from_push,
+        "get_candidates": get_candidates,
     }
