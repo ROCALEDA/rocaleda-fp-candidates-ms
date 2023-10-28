@@ -44,3 +44,22 @@ class TestUserController:
 
         with pytest.raises(HTTPException):
             await create_candidate_func(data_mock)
+
+    @pytest.mark.asyncio
+    async def test_get_candidates_paginated(self):
+        mock_service = Mock()
+        mock_service.get_candidates_paginated = AsyncMock()
+        mock_service.get_candidates_paginated.return_value = {
+            "data": [],
+            "total_pages": 1,
+        }
+
+        get_candidates_paginated_func = candidate_controller.initialize(mock_service)[
+            "get_candidates_paginated"
+        ]
+
+        response = await get_candidates_paginated_func(
+            tech_skills=None, soft_skills=None, page=2, limit=10
+        )
+
+        assert "data" in response

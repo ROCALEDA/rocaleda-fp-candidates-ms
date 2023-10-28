@@ -39,3 +39,21 @@ class TestCandidateService:
                 "tech_skills": [mocked_tech_skill],
             }
         )
+
+    @pytest.mark.asyncio
+    async def test_get_candidates_paginated(self):
+        mocked_repository = Mock()
+        mocked_repository.get_candidates_filtered = AsyncMock()
+        mocked_repository.get_candidates_filtered.return_value = {
+            "data": [],
+            "total_pages": 1,
+        }
+
+        service = CandidateService(mocked_repository)
+
+        response = await service.get_candidates_paginated(
+            page=1, limit=10, tech_skills=["NodeJS"], soft_skills=["Responsibility"]
+        )
+
+        assert "data" in response
+        assert "total_pages" in response
