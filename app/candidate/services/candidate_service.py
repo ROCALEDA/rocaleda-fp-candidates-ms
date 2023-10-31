@@ -32,7 +32,7 @@ class CandidateService:
         await self.candidate_repository.create_candidate(new_candidate_dict)
 
     async def get_candidates_paginated(
-        self, page: int, limit: int, tech_skills=None, soft_skills=None
+        self, page: int, limit: int, tech_skills=None, soft_skills=None, id_list=None
     ):
         tech_skills_ids = [
             TechSkill.get_id_by_name(tech_skill) for tech_skill in tech_skills
@@ -46,4 +46,5 @@ class CandidateService:
             soft_skills_ids=soft_skills_ids,
             page=page,
             per_page=limit,
+            ids=id_list,
         )
