@@ -52,7 +52,11 @@ class TestCandidateService:
         service = CandidateService(mocked_repository)
 
         response = await service.get_candidates_paginated(
-            page=1, limit=10, tech_skills=["NodeJS"], soft_skills=["Responsibility"]
+            page=1,
+            limit=10,
+            tech_skills=["NodeJS"],
+            soft_skills=["Responsibility"],
+            id_list=["1,2"],
         )
 
         assert "data" in response

@@ -10,8 +10,8 @@ if TYPE_CHECKING:
 
 
 router = APIRouter(
-    prefix="/candidate",
-    tags=["candidate"],
+    prefix="/candidates",
+    tags=["candidates"],
     responses={404: {"description": "Not found"}},
 )
 
@@ -35,14 +35,20 @@ def initialize(candidate_service: "CandidateService"):
     async def get_candidates_paginated(
         tech_skills: str = Query(None),
         soft_skills: str = Query(None),
+        ids: str = Query(None),
         page: int = Query(1),
         limit: int = Query(10),
     ):
         tech_list = tech_skills.split(",") if tech_skills else []
         soft_list = soft_skills.split(",") if soft_skills else []
+        id_list = ids.split(",") if ids else []
 
         return await candidate_service.get_candidates_paginated(
-            tech_skills=tech_list, soft_skills=soft_list, page=page, limit=limit
+            tech_skills=tech_list,
+            soft_skills=soft_list,
+            id_list=id_list,
+            page=page,
+            limit=limit,
         )
 
     return {
