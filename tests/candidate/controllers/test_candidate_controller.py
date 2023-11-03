@@ -59,7 +59,7 @@ class TestUserController:
         ]
 
         response = await get_candidates_paginated_func(
-            tech_skills=None, soft_skills=None, page=2, limit=10
+            tech_skills=None, soft_skills=None, ids=None, page=2, limit=10
         )
 
         assert "data" in response

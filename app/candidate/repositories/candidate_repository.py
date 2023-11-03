@@ -19,10 +19,15 @@ class CandidateRepository:
             return db.query(models.Technology).filter_by(name=name).first()
 
     async def get_candidates_filtered(
-        self, tech_skills_ids=None, soft_skills_ids=None, page=1, per_page=10
+        self, tech_skills_ids=None, soft_skills_ids=None, ids=None, page=1, per_page=10
     ):
         with database.create_session() as db:
-            query = db.query(models.Candidate)
+            if ids is not None:
+                query = db.query(models.Candidate).filter(
+                    models.Candidate.user_id.in_(ids)
+                )
+            else:
+                query = db.query(models.Candidate)
 
             tech_skill_subquery = None
             soft_skill_subquery = None
