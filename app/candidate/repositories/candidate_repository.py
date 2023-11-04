@@ -22,7 +22,7 @@ class CandidateRepository:
         self, tech_skills_ids=None, soft_skills_ids=None, ids=None, page=1, per_page=10
     ):
         with database.create_session() as db:
-            if ids is not None:
+            if ids is not None and len(ids) > 0:
                 query = db.query(models.Candidate).filter(
                     models.Candidate.user_id.in_(ids)
                 )
