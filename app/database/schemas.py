@@ -24,10 +24,10 @@ class PubSubMessage(BaseModel):
 class InterviewBase(BaseModel):
     customer_id: int
     candidate_id: int
+    subject: str
     realization_date: datetime
-    open_position_id: Optional[int]
     score: Optional[int]
-    result: Optional[str]
+    open_position_id: Optional[int]
 
 
 # Item con datos de entrevista respuesta

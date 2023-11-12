@@ -63,10 +63,10 @@ class Interview(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     customer_id = Column(Integer)
     candidate_id = Column(Integer, ForeignKey("candidate.user_id"))
+    subject = Column(String(30))
     realization_date = Column(DateTime)
-    open_position_id = Column(Integer, nullable=True)
     score = Column(Numeric(5, 2), nullable=True)
-    result = Column(String(20), nullable=True)
+    open_position_id = Column(Integer, nullable=True)
 
     # parents relationships
     candidate = relationship("Candidate", back_populates="interviews")
