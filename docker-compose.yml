@@ -4,7 +4,7 @@ services:
   candidates-ms:
     build: .
     ports:
-      - "8000:8000"
+      - "8002:8000"
     environment:
       - DB_URL=postgresql://docker:docker@db:5432/candidates
     depends_on:
@@ -12,7 +12,7 @@ services:
   db:
     image: postgres:15
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
