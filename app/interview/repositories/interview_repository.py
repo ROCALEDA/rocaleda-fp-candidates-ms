@@ -1,4 +1,5 @@
 from app.database import models, database
+from app.database.schemas import InterviewBase
 
 
 class InterviewRepository:
@@ -31,3 +32,18 @@ class InterviewRepository:
             offset = (page - 1) * page_size
             query = query.offset(offset).limit(page_size)
             return {"data": query.all(), "total_pages": total_pages}
+
+    async def create_interview(self, interview: InterviewBase):
+        with database.create_session() as db:
+            new_interview = models.Interview(
+                customer_id=interview.customer_id,
+                candidate_id=interview.candidate_id,
+                subject=interview.subject,
+                realization_date=interview.realization_date,
+                score=None,
+                open_position_id=interview.open_position_id,
+            )
+            db.add(new_interview)
+            db.commit()
+
+            return new_interview
