@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from typing import TYPE_CHECKING
 
-from app.database.schemas import InterviewsResponse
+from app.database.schemas import InterviewBase, InterviewsResponse
 
 if TYPE_CHECKING:
     from app.interview.repositories.interview_repository import InterviewRepository
@@ -28,3 +28,6 @@ class InterviewService:
             )
         else:
             raise HTTPException(403)
+
+    async def create_interview(self, interview: InterviewBase):
+        return await self.interview_repository.create_interview(interview)

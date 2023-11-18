@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Header, Query
 from typing import TYPE_CHECKING
 
-from app.database.schemas import InterviewsResponse
+from app.database.schemas import InterviewBase, InterviewsResponse
 
 if TYPE_CHECKING:
     from app.interview.services.interview_service import InterviewService
@@ -28,6 +28,11 @@ def initialize(interview_service: "InterviewService"):
             limit=limit,
         )
 
+    @router.post("")
+    async def create_interview(interview: InterviewBase):
+        return await interview_service.create_interview(interview)
+
     return {
         "get_interviews_paginated": get_interviews_paginated,
+        "create_interview": create_interview,
     }
